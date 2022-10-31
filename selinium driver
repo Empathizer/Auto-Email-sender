@@ -1,0 +1,16 @@
+import smtplib
+import time
+
+
+
+def love():
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login('sender email', 'sender pasword')
+    server.sendmail('Sender EMail','Reciever Pasword', 'Mail.........')
+love()
+
+for i in range(1000):
+    love()
+    time.sleep(0.2)
+
