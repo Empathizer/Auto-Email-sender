@@ -1,16 +1,37 @@
 import smtplib
-import time
+from email.message import EmailMessage
 
+# Email configurations
+Emails = ["babahubsa@gmail.com", "legendtailorsa@gmail.com"]
+for email in Emails:
+    sender_email = ""
+    recipient_email = email
+    email_subject = "Test"
+    email_body = "Legend Tailor is here"
 
+    # Create the email message
+    message = EmailMessage()
+    message.set_content(email_body)
+    message["Subject"] = email_subject
+    message["From"] = sender_email
+    message["To"] = recipient_email
 
-def love():
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
-    server.login('sender email', 'sender pasword')
-    server.sendmail('Sender EMail','Reciever Pasword', 'Mail.........')
-love()
+    # SMTP server configurations (for example, using Gmail's SMTP server)
+    smtp_server = "smtp.gmail.com"
+    smtp_port = 587  # Port for TLS connection
 
-for i in range(1000):
-    love()
-    time.sleep(0.2)
+    # Login to the SMTP server
+    smtp_username = ""
+    smtp_password = ""
 
+    try:
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()  # Upgrade the connection to a secure, encrypted connection
+        server.login(smtp_username, smtp_password)
+        server.send_message(message)  # Send the email
+        server.quit()  # Close the connection
+
+        print("Email sent successfully!")
+
+    except Exception as e:
+        print(f"Failed to send email. Error: {e}")
